@@ -58,6 +58,7 @@ CONFIG_MAPPING_NAMES = OrderedDict(
         ("clap", "ClapConfig"),
         ("clip", "CLIPConfig"),
         ("clip_vision_model", "CLIPVisionConfig"),
+        ("clvp", "ClvpConfig"),
         ("codegen", "CodeGenConfig"),
         ("cohere", "CohereConfig"),
         ("cogvlm", "CogVLMConfig"),
@@ -103,8 +104,8 @@ CONFIG_MAPPING_NAMES = OrderedDict(
         ("mistral", "MistralConfig"),
         ("mixtral", "MixtralConfig"),
         ("mobilevit", "MobileViTConfig"),
-        ("mobilenet_v1","MobileNetV1Config"),
-        ("mobilenet_v2","MobileNetV2Config"),
+        ("mobilenet_v1", "MobileNetV1Config"),
+        ("mobilenet_v2", "MobileNetV2Config"),
         ("musicgen", "MusicgenConfig"),
         ("musicgen_melody", "MusicgenMelodyConfig"),
         ("mt5", "MT5Config"),
@@ -415,6 +416,7 @@ MODEL_NAMES_MAPPING = OrderedDict(
         ("clip", "CLIP"),
         ("clip_vision_model", "CLIPVisionModel"),
         ("clipseg", "CLIPSeg"),
+        ("clvp", "CLVP"),
         ("code_llama", "CodeLlama"),
         ("codegen", "CodeGen"),
         ("cohere", "Cohere"),
@@ -909,7 +911,8 @@ class _LazyLoadAllMappings(OrderedDict):
 
         for model_type, map_name in self._mapping.items():
             module_name = model_type_to_module_name(model_type)
-            module = importlib.import_module(f".{module_name}", "transformers.models")
+            module = importlib.import_module(
+                f".{module_name}", "transformers.models")
             mapping = getattr(module, map_name)
             self._data.update(mapping)
 
